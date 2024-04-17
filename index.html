@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .superhero {
+      width: 25%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .superhero img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+
+    <h1 class="header">Lista de Super Herois</h1>
+  
+    <div class="container">
+  </div>
+
+  <script>
+    const container = document.querySelector('.container');
+    const url = 'https://akabab.github.io/superhero-api/api/all.json';
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const superheroes = data.slice(75,83);
+
+        superheroes.forEach(superhero => {
+          const superheroDiv = document.createElement('div');
+          superheroDiv.classList.add('superhero');
+
+          const name = document.createElement('h2');
+          name.textContent = superhero.name;
+
+          const image = document.createElement('img');
+          image.src = superhero.images.md;
+
+          superheroDiv.appendChild(name);
+          superheroDiv.appendChild(image);
+
+          container.appendChild(superheroDiv);
+        });
+      })
+      .catch(error => console.error(error));
+  </script>
+
+  
+</body>
+</html>
